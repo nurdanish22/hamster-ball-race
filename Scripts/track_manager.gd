@@ -6,8 +6,8 @@ extends Node3D
 
 # ===== SPAWN POINT POSITIONS =====
 # Adjust these to match your track's actual start positions
-@export var p1_spawn_position := Vector3(0.0, 2.0, 0.0)
-@export var p2_spawn_position := Vector3(2.0, 2.0, 0.0)
+@export var p1_spawn_position := Vector3(7.0, 1.0, -4.5)
+@export var p2_spawn_position := Vector3(7.5, 1.0, -7.6)
 
 # Internal references set during _ready
 var player1: RigidBody3D = null
