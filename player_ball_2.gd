@@ -6,9 +6,9 @@ extends RigidBody3D
 @export var turn_speed := 3.0       
 
 # ===== DYNAMIC RESPAWN SYSTEM =====
-@export var fall_limit := -10.0       
+@export var void_check_distance := 30.0 # How far down to look before deciding we've fallen off
 var respawn_position := Vector3.ZERO   
-var respawn_heading := 0.0             # Remembers which way we were facing when safe
+var respawn_heading := 0.0             
 var should_respawn := false            
 
 # ===== PHYSICS IDENTITY =====
@@ -27,23 +27,21 @@ func _ready():
 	respawn_heading = heading_angle
 
 func _physics_process(delta):
-	# 1. CHECK IF FELL OFF THE TRACK
-	if global_position.y < fall_limit and not should_respawn:
-		trigger_respawn()
-		return 
+	# 1. RUN SMART GROUND & VOID DETECTION
+	check_ground_and_void()
+	
+	if should_respawn:
+		return # Stop processing inputs if we are in the middle of a respawn
 
-	# 2. DYNAMICALLY TRACK THE GROUND BENEATH THE BALL
-	track_last_grounded_position()
-
-	# 3. HANDLE STEERING
+	# 2. HANDLE STEERING
 	var steer_input = Input.get_action_strength("arrow_left") - Input.get_action_strength("arrow_right")
 	heading_angle += steer_input * turn_speed * delta
 	heading_angle = wrapf(heading_angle, 0.0, TAU) 
 
-	# 4. GET FORWARD/BACKWARD INPUT
+	# 3. GET FORWARD/BACKWARD INPUT
 	var forward_input = Input.get_action_strength("arrow_down") - Input.get_action_strength("arrow_up")
 
-	# 5. CALCULATE DIRECTION
+	# 4. CALCULATE DIRECTION
 	var move_dir = Vector3.FORWARD.rotated(Vector3.UP, heading_angle)
 
 	# ===== APPLY FORCE =====
@@ -56,27 +54,34 @@ func _physics_process(delta):
 		linear_velocity = linear_velocity.normalized() * max_speed
 
 
-func track_last_grounded_position():
-	# Get the direct 3D physics state
+func check_ground_and_void():
 	var space_state = get_world_3d().direct_space_state
-	
-	# Set raycast start (ball center) and end (slightly below the ball)
-	# Adjusted for size_factor so it scales if ball changes size
 	var start = global_position
-	var end = global_position + Vector3.DOWN * (size_factor + 0.5)
 	
-	var query = PhysicsRayQueryParameters3D.create(start, end)
+	# ---- RAY 1: SHORT GROUND TRACKER ----
+	var short_end = global_position + Vector3.DOWN * (size_factor + 0.5)
+	var short_query = PhysicsRayQueryParameters3D.create(start, short_end)
+	short_query.exclude = [get_rid()]
 	
-	# OPTIONAL: Exclude the player ball itself from the raycast
-	query.exclude = [get_rid()]
+	var ground_hit = space_state.intersect_ray(short_query)
 	
-	var result = space_state.intersect_ray(query)
-	
-	# If the ray hits the track, save this spot!
-	if result:
-		# Add a small vertical offset (Vector3.UP) so the ball doesn't spawn stuck inside the mesh
-		respawn_position = result.position + Vector3.UP * (size_factor * 0.6)
+	if ground_hit:
+		# Player is safely driving on the track. Save this location!
+		respawn_position = ground_hit.position + Vector3.UP * (size_factor * 0.6)
 		respawn_heading = heading_angle
+	else:
+		# ---- RAY 2: LONG VOID CHECKER (Airborne) ----
+		# We only check for the void if the player is actually descending (moving downwards)
+		if linear_velocity.y < -1.0:
+			var long_end = global_position + Vector3.DOWN * void_check_distance
+			var long_query = PhysicsRayQueryParameters3D.create(start, long_end)
+			long_query.exclude = [get_rid()]
+			
+			var void_hit = space_state.intersect_ray(long_query)
+			
+			# If the long ray hits ABSOLUTELY NOTHING, they missed the track completely
+			if not void_hit and not should_respawn:
+				trigger_respawn()
 
 
 func trigger_respawn():
@@ -85,15 +90,15 @@ func trigger_respawn():
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if should_respawn:
-		# Teleport to the last saved ground position
+		# Teleport to the last saved track segment
 		var current_transform = state.transform
 		current_transform.origin = respawn_position
 		state.transform = current_transform
 		
-		# Reset driving heading so the camera and controls match the moment before the fall
+		# Reset our driving heading
 		heading_angle = respawn_heading
 		
-		# Kill the falling physics momentum
+		# Kill all falling velocity instantly
 		state.linear_velocity = Vector3.ZERO
 		state.angular_velocity = Vector3.ZERO
 		

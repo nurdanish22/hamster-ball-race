@@ -36,14 +36,14 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.42
 script = ExtResource("3_cdjjo")
 move_force = 35.0
 turn_speed = 3.0
-fall_limit = -10.0
+void_check_distance = 30.0
 
 [node name="PlayerBall2" parent="." unique_id=118592179 instance=ExtResource("2_f0dlf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.43496, 1, -7.5601892)
 script = ExtResource("3_f0dlf")
 move_force = 35.0
 turn_speed = 3.0
-fall_limit = -10.0
+void_check_distance = 30.0
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=240749938]
 anchors_preset = 15
