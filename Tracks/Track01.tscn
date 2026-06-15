@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cguulmnrysj1x"]
 
+[ext_resource type="Script" uid="uid://2y5lob4s86mv" path="res://Scripts/track_manager.gd" id="1_f0dlf"]
 [ext_resource type="PackedScene" uid="uid://b4q1tv2kmm2s6" path="res://Assets/Racing map.blend" id="1_lk4pw"]
 [ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_f0dlf"]
 [ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_1k6jp"]
@@ -19,6 +20,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Track01" type="Node3D" unique_id=787761610]
+script = ExtResource("1_f0dlf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2075467195]
 environment = SubResource("Environment_036b0")

@@ -131,11 +131,27 @@ func apply_ball_profile():
 	linear_damp = 0.8 * mass_factor
 	angular_damp = 1.0 * mass_factor
 
-	# DYNAMIC COLOR CODES
-	var mesh_node = get_node_or_null("MeshInstance3D")
-	if mesh_node and mesh_node is MeshInstance3D:
-		var new_material = StandardMaterial3D.new()
-		new_material.albedo_color = ball_color
+	# ===== DYNAMIC MESH SWAP =====
+	# Remove the old placeholder MeshInstance3D (if present)
+	var old_mesh = get_node_or_null("MeshInstance3D")
+	if old_mesh:
+		old_mesh.queue_free()
 
-		# This forces the mesh to use temporary script-generated color
-		mesh_node.material_override = new_material
+	# Load and instantiate the correct ball visual scene
+	var choice = Global.p1_choice if player_id == 1 else Global.p2_choice
+	var ball_scene_path = Global.BALL_SCENES.get(choice, Global.BALL_SCENES["standard"])
+	var ball_scene = load(ball_scene_path)
+	if ball_scene:
+		var ball_visual = ball_scene.instantiate()
+		# The Balls/*.tscn root is a RigidBody3D — we only want its visual child (first child Node3D)
+		# Extract the visual Node3D child and re-parent it here
+		var visual_node: Node3D = null
+		for child in ball_visual.get_children():
+			if child is Node3D and not child is CollisionShape3D:
+				visual_node = child
+				break
+		if visual_node:
+			ball_visual.remove_child(visual_node)
+			add_child(visual_node)
+			visual_node.name = "BallMesh"
+		ball_visual.queue_free()

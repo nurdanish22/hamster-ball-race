@@ -3,6 +3,13 @@ extends Node
 
 var is_two_player := false # True if 2-player split screen, false if solo
 
+# Maps each choice key to the corresponding ball scene path
+const BALL_SCENES = {
+	"feather": "res://Balls/ball_speed.tscn",
+	"standard": "res://Balls/ball_default.tscn",
+	"iron": "res://Balls/ball_heavy.tscn"
+}
+
 # Add the ball profiles
 const BALL_PROFILES = {
 	"feather": {
