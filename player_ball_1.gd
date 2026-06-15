@@ -55,7 +55,7 @@ func _physics_process(delta):
 	# ===== SPEED LIMIT =====
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
-
+	
 
 func check_ground_and_void(delta: float):
 	var space_state = get_world_3d().direct_space_state
