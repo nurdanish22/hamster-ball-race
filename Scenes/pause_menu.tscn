@@ -146,6 +146,7 @@ anchor_bottom = 1.0
 offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1468351515]
 modulate = Color(1, 1, 1, 0)
