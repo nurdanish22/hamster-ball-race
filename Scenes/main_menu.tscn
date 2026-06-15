@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bk3pkipmd2r8i" path="res://Scripts/main_menu.gd" id="1_28flt"]
 
 [node name="MainMenu" type="Control" unique_id=404550815]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -46,7 +47,7 @@ offset_bottom = -3.0517578e-05
 theme_override_font_sizes/font_size = 38
 text = "Quit"
 
-[connection signal="pressed" from="StartButton" to="." method="_on_one_player_button_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="QuitButton" to="." method="_on_two_player_button_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_one_player_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_two_player_button_pressed"]
