@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://bmb66x21c1yyi"]
+[gd_scene format=3 uid="uid://cguulmnrysj1x"]
 
-[ext_resource type="PackedScene" uid="uid://b4q1tv2kmm2s6" path="res://Assets/Racing map.blend" id="1_lk4pw"]
-[ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_f0dlf"]
-[ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_1k6jp"]
+[ext_resource type="PackedScene" uid="uid://b4q1tv2kmm2s6" path="res://Assets/Racing map.blend" id="1_cavha"]
+[ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_b3r30"]
+[ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_y582o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tlwt5"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,13 +26,13 @@ environment = SubResource("Environment_036b0")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Racing map" parent="." unique_id=868700591 instance=ExtResource("1_lk4pw")]
+[node name="Racing map" parent="." unique_id=868700591 instance=ExtResource("1_cavha")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.09103465, 0.12605333, -0.857713)
 
-[node name="PlayerBall1" parent="." unique_id=28442041 instance=ExtResource("2_f0dlf")]
+[node name="PlayerBall1" parent="." unique_id=28442041 instance=ExtResource("2_b3r30")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4239664, 1, -4.500433)
 
-[node name="PlayerBall2" parent="." unique_id=118592179 instance=ExtResource("2_f0dlf")]
+[node name="PlayerBall2" parent="." unique_id=118592179 instance=ExtResource("2_b3r30")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.43496, 1, -7.5601892)
 player_id = 2
 
@@ -55,7 +55,7 @@ handle_input_locally = false
 size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="CameraRig1" parent="GridContainer/SubViewportContainer1/SubViewport1" unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("3_1k6jp")]
+[node name="CameraRig1" parent="GridContainer/SubViewportContainer1/SubViewport1" unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("3_y582o")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4506083, 1, -4.481065)
 target = NodePath("../../../../PlayerBall1")
 
@@ -77,7 +77,7 @@ handle_input_locally = false
 size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="CameraRig2" parent="GridContainer/SubViewportContainer2/SubViewport2" unique_id=190627746 node_paths=PackedStringArray("target") instance=ExtResource("3_1k6jp")]
+[node name="CameraRig2" parent="GridContainer/SubViewportContainer2/SubViewport2" unique_id=190627746 node_paths=PackedStringArray("target") instance=ExtResource("3_y582o")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.45515, 1, -7.5426006)
 target = NodePath("../../../../PlayerBall2")
 
