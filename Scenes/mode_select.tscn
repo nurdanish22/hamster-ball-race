@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://fo804rqht364"]
+
+[ext_resource type="Script" uid="uid://bpomtd6atvo8i" path="res://mode_select.gd" id="1_qw3jj"]
+
+[node name="ModeSelect" type="Control" unique_id=404550815]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qw3jj")
+
+[node name="Label" type="Label" parent="." unique_id=83129203]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 11.275001
+anchor_top = 3.5000002
+anchor_right = 18.300001
+anchor_bottom = 5.175
+offset_left = -3.0517578e-05
+offset_top = -1.5258789e-05
+offset_right = -6.1035156e-05
+theme_override_font_sizes/font_size = 48
+text = "Mode Select"
+
+[node name="OnePlayerButton" type="Button" parent="." unique_id=711650169]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 6.8250003
+anchor_top = 7.0750003
+anchor_right = 22.875002
+anchor_bottom = 8.725
+offset_right = -6.1035156e-05
+theme_override_font_sizes/font_size = 38
+text = "1 Player"
+
+[node name="TwoPlayerButton" type="Button" parent="." unique_id=660327812]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 6.8250003
+anchor_top = 9.675
+anchor_right = 22.875002
+anchor_bottom = 11.325001
+offset_right = -6.1035156e-05
+offset_bottom = -3.0517578e-05
+theme_override_font_sizes/font_size = 38
+text = "2 Player"
+
+[connection signal="pressed" from="OnePlayerButton" to="." method="_on_one_player_button_pressed"]
+[connection signal="pressed" from="TwoPlayerButton" to="." method="_on_two_player_button_pressed"]

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://81atvoddvjip"]
+
+[ext_resource type="Script" uid="uid://65fulr1qb6ph" path="res://track_select.gd" id="1_jt3ec"]
+
+[node name="TrackSelect" type="Control" unique_id=658308039]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jt3ec")
+
+[node name="Label" type="Label" parent="." unique_id=1026833316]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 11.225
+anchor_top = 2.8500001
+anchor_right = 18.150002
+anchor_bottom = 4.525
+offset_right = -6.1035156e-05
+theme_override_font_sizes/font_size = 48
+text = "Track Select"
+
+[node name="Track01Button" type="Button" parent="." unique_id=1029131108]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 6.55
+anchor_top = 6.7250004
+anchor_right = 22.7
+anchor_bottom = 8.25
+theme_override_font_sizes/font_size = 38
+text = "Track 1"
+
+[node name="Track02Button" type="Button" parent="." unique_id=285910756]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 6.55
+anchor_top = 9.400001
+anchor_right = 22.7
+anchor_bottom = 10.925
+offset_top = -3.0517578e-05
+theme_override_font_sizes/font_size = 38
+text = "Track 2"

@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://crxpipuaw5s0y"]
+
+[ext_resource type="Script" uid="uid://bk3pkipmd2r8i" path="res://main_menu.gd" id="1_28flt"]
+
+[node name="MainMenu" type="Control" unique_id=728637913]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_28flt")
+
+[node name="Label" type="Label" parent="." unique_id=70804436]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 8.375
+anchor_top = 3.1750002
+anchor_right = 20.075
+anchor_bottom = 6.0000005
+offset_top = 1.9999924
+offset_bottom = -1.5258789e-05
+theme_override_font_sizes/font_size = 52
+text = "Hamster Ball Race"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="." unique_id=1202533467]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 12.05
+anchor_top = 8.0
+anchor_right = 19.125
+anchor_bottom = 9.1
+offset_left = -45.0
+offset_top = 48.0
+offset_right = -45.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 26
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="." unique_id=450697082]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 12.025001
+anchor_top = 9.925
+anchor_right = 19.1
+anchor_bottom = 11.025001
+offset_left = -45.00003
+offset_top = 48.0
+offset_right = -45.0
+offset_bottom = 47.99997
+theme_override_font_sizes/font_size = 26
+text = "Quit"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
