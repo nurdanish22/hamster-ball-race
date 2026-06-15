@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cyjmqco38nqu4"]
 
 [ext_resource type="PackedScene" uid="uid://cmrs03808ook2" path="res://Assets/ball_(default).tscn" id="1_l8tlc"]
+[ext_resource type="PackedScene" uid="uid://dw350tgdrp35b" path="res://Assets/hamsteranimated2.glb" id="1_v7nnn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7nnn"]
 
@@ -11,3 +12,24 @@ transform = Transform3D(0.585, 0, 0, 0, 0.585, 0, 0, 0, 0.585, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1308845309]
 shape = SubResource("SphereShape3D_v7nnn")
+
+[node name="hamsteranimated2" parent="." unique_id=190852018 instance=ExtResource("1_v7nnn")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.55, 0)
+
+[node name="Skeleton3D" parent="hamsteranimated2/Armature" parent_id_path=PackedInt32Array(190852018, 1250774041) index="0" unique_id=1061802450]
+bones/1/rotation = Quaternion(0.10687578, 3.7504873e-05, 0.0017284487, 0.9942709)
+bones/2/rotation = Quaternion(0.7063002, 0.038731508, 0.70603746, 0.03392733)
+bones/3/rotation = Quaternion(0.07878582, 0.70271116, 0.07878418, 0.7026969)
+bones/6/rotation = Quaternion(-0.0835641, 0.702159, -0.083562545, 0.7021447)
+bones/9/position = Vector3(0.48885068, 0.7214016, 0.060910203)
+bones/9/rotation = Quaternion(-0.02936942, -0.033236783, -0.8099601, 0.5848054)
+bones/10/rotation = Quaternion(0.04252505, 0.009798244, -0.24058947, 0.9696455)
+bones/11/position = Vector3(-0.4225339, 0.70119774, 0.062994555)
+bones/11/rotation = Quaternion(-0.031499583, 0.040591106, 0.78898275, 0.61226326)
+bones/12/rotation = Quaternion(0.03263668, 0.09896742, 0.29773065, 0.94894505)
+
+[node name="Bone_001" parent="hamsteranimated2/Armature/Skeleton3D" index="0" unique_id=83453461]
+transform = Transform3D(0.99999404, -0.003429075, 0.00044403848, 0.0033966596, 0.9501804, -0.31168184, 0.00064686395, 0.3116815, 0.9501863, 2.5556342e-17, 1.0063953, -0.039835222)
+
+[editable path="Ball (Default)"]
+[editable path="hamsteranimated2"]

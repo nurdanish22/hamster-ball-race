@@ -32,6 +32,11 @@ var camera_rig: Node3D = null
 # Smooth rotation speed for the visual mesh facing direction (degrees/sec feel)
 @export var mesh_turn_speed := 10.0
 
+# ===== ANIMATION =====
+# Reference to the AnimationPlayer inside the hamsteranimated2 node.
+# Populated automatically in apply_ball_profile().
+var anim_player: AnimationPlayer = null
+
 # Dynamic Input Action Strings
 var input_left := ""
 var input_right := ""
@@ -91,7 +96,32 @@ func _physics_process(delta):
 
 	# 6. VISUAL MESH ORIENTATION
 	# Keep BallMesh upright and facing the camera's forward direction.
-	_update_ball_mesh_rotation(delta, abs(forward_input) > 0.01)
+	var is_moving: bool = abs(forward_input) > 0.01
+	_update_ball_mesh_rotation(delta, is_moving)
+
+	# 7. ANIMATION CONTROL
+	_update_animation(is_moving)
+
+
+func _update_animation(is_moving: bool) -> void:
+	if anim_player == null:
+		return
+
+	if is_moving:
+		# Switch to "running" if not already playing it
+		if anim_player.current_animation != "running":
+			anim_player.play("running")
+
+		# Dynamic speed scale based on horizontal (XZ) velocity.
+		# At max_speed the animation plays at 1.0x (natural pace).
+		# Clamped to [0.1, 2.0] so it never freezes or looks absurd.
+		var horizontal_speed: float = Vector2(linear_velocity.x, linear_velocity.z).length()
+		anim_player.speed_scale = clamp(horizontal_speed / max_speed, 0.1, 2.0)
+	else:
+		# Transition to idle and reset speed_scale to natural pace
+		if anim_player.current_animation != "Idle":
+			anim_player.speed_scale = 1.0
+			anim_player.play("Idle")
 
 
 func _update_ball_mesh_rotation(delta: float, is_moving: bool) -> void:
@@ -185,20 +215,34 @@ func apply_ball_profile():
 		old_mesh.queue_free()
 
 	# Load and instantiate the correct ball visual scene
-	var choice = Global.p1_choice if player_id == 1 else Global.p2_choice
-	var ball_scene_path = Global.BALL_SCENES.get(choice, Global.BALL_SCENES["standard"])
-	var ball_scene = load(ball_scene_path)
+	var choice: String = Global.p1_choice if player_id == 1 else Global.p2_choice
+	var ball_scene_path: String = Global.BALL_SCENES.get(choice, Global.BALL_SCENES["standard"])
+	var ball_scene: PackedScene = load(ball_scene_path)
 	if ball_scene:
-		var ball_visual = ball_scene.instantiate()
-		# The Balls/*.tscn root is a RigidBody3D — we only want its visual child (first child Node3D)
-		# Extract the visual Node3D child and re-parent it here
-		var visual_node: Node3D = null
+		var ball_visual: Node3D = ball_scene.instantiate()
+		# The Balls/*.tscn root is a RigidBody3D.
+		# We create a single container "BallMesh" Node3D and move ALL visual
+		# children (ball shell + hamsteranimated2) into it, skipping only
+		# CollisionShape3D which belongs to the physics body we're discarding.
+		var container: Node3D = Node3D.new()
+		container.name = "BallMesh"
+		add_child(container)
+
+		# Collect children first (can't iterate while re-parenting)
+		var visual_children: Array = []
 		for child in ball_visual.get_children():
-			if child is Node3D and not child is CollisionShape3D:
-				visual_node = child
-				break
-		if visual_node:
-			ball_visual.remove_child(visual_node)
-			add_child(visual_node)
-			visual_node.name = "BallMesh"
+			if not child is CollisionShape3D:
+				visual_children.append(child)
+
+		for visual_child in visual_children:
+			ball_visual.remove_child(visual_child)
+			container.add_child(visual_child)
+
+		# Find and cache the AnimationPlayer inside hamsteranimated2
+		var hamster: Node = container.get_node_or_null("hamsteranimated2")
+		if hamster:
+			anim_player = hamster.get_node_or_null("AnimationPlayer")
+			if anim_player:
+				anim_player.play("Idle")
+
 		ball_visual.queue_free()
