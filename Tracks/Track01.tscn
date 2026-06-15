@@ -17,7 +17,7 @@ sky = SubResource("Sky_aqk2v")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Track02" type="Node3D" unique_id=787761610]
+[node name="Track01" type="Node3D" unique_id=787761610]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2075467195]
 environment = SubResource("Environment_036b0")
@@ -32,13 +32,60 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.09103465, 0.12605333, -0.85
 [node name="PlayerBall1" parent="." unique_id=28442041 instance=ExtResource("2_f0dlf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4239664, 1, -4.500433)
 
-[node name="CameraRig1" parent="." unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("3_1k6jp")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4506083, 1, -4.481065)
-target = NodePath("../PlayerBall1")
+[node name="PlayerBall2" parent="." unique_id=118592179 instance=ExtResource("2_f0dlf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.43496, 1, -7.5601892)
+player_id = 2
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig1" unique_id=989060239]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=240749938]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="SubViewportContainer1" type="SubViewportContainer" parent="GridContainer" unique_id=1075232161]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport1" type="SubViewport" parent="GridContainer/SubViewportContainer1" unique_id=504117741]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig1" parent="GridContainer/SubViewportContainer1/SubViewport1" unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("3_1k6jp")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4506083, 1, -4.481065)
+target = NodePath("../../../../PlayerBall1")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="GridContainer/SubViewportContainer1/SubViewport1/CameraRig1" unique_id=989060239]
 transform = Transform3D(-1, -2.990035e-08, 8.2150535e-08, 0, 0.9396926, 0.34202012, -8.742278e-08, 0.34202012, -0.9396926, 0, 0, 0)
 spring_length = 3.0
 
-[node name="Camera3D" type="Camera3D" parent="CameraRig1/SpringArm3D" unique_id=692836597]
+[node name="Camera3D" type="Camera3D" parent="GridContainer/SubViewportContainer1/SubViewport1/CameraRig1/SpringArm3D" unique_id=692836597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5064745)
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer" unique_id=1873731029]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport2" type="SubViewport" parent="GridContainer/SubViewportContainer2" unique_id=1491013027]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig2" parent="GridContainer/SubViewportContainer2/SubViewport2" unique_id=190627746 node_paths=PackedStringArray("target") instance=ExtResource("3_1k6jp")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.45515, 1, -7.5426006)
+target = NodePath("../../../../PlayerBall2")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="GridContainer/SubViewportContainer2/SubViewport2/CameraRig2" unique_id=514418615]
+transform = Transform3D(-1, -2.990035e-08, 8.2150535e-08, 0, 0.9396926, 0.34202012, -8.742278e-08, 0.34202012, -0.9396926, 0, 0, 0)
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="GridContainer/SubViewportContainer2/SubViewport2/CameraRig2/SpringArm3D" unique_id=1788547831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5064745)
+
+[node name="Node" type="Node" parent="." unique_id=901598383]
