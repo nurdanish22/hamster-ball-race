@@ -23,6 +23,7 @@ theme_override_font_sizes/font_size = 48
 text = "Hamster Ball Race"
 
 [node name="StartButton" type="Button" parent="." unique_id=711650169]
+process_mode = 3
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 6.8250003

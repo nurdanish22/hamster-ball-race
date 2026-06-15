@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwhalb8cuv6rt" path="res://Scripts/character_selection.gd" id="1_mng1v"]
 
 [node name="CharacterSelection" type="Control" unique_id=204662202]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

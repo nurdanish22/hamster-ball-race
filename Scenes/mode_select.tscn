@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bpomtd6atvo8i" path="res://Scripts/mode_select.gd" id="1_qw3jj"]
 
 [node name="ModeSelect" type="Control" unique_id=404550815]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

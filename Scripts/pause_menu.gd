@@ -25,9 +25,8 @@ func _on_restart_pressed():
 	resume()
 	get_tree().reload_current_scene()
 
-
 func _on_quit_pressed():
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 func _process(delta):
 	testEsc()
