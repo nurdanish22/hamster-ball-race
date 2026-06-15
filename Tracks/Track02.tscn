@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmb66x21c1yyi"]
 
 [ext_resource type="PackedScene" uid="uid://b4q1tv2kmm2s6" path="res://Assets/Racing map.blend" id="1_cavha"]
-[ext_resource type="Script" path="res://Scripts/track_manager.gd" id="1_y582o"]
+[ext_resource type="Script" uid="uid://2y5lob4s86mv" path="res://Scripts/track_manager.gd" id="1_y582o"]
 [ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_b3r30"]
 [ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_y582o"]
 [ext_resource type="PackedScene" uid="uid://4lc2dhktj21v" path="res://Scenes/pause_menu.tscn" id="4_b3r30"]

@@ -15,22 +15,22 @@ const BALL_PROFILES = {
 	"feather": {
 		"mass_factor": 0.6,
 		"size_factor": 0.8,
-		"move_force": 30.0,
-		"max_speed": 20.0,
+		"move_force": 40.0,
+		"max_speed": 30.0,
 		"color": Color.YELLOW
 	},
 	"standard": {
 		"mass_factor": 1.0,
 		"size_factor": 1.0,
-		"move_force": 28.0,
-		"max_speed": 18.0,
+		"move_force": 38.0,
+		"max_speed": 28.0,
 		"color": Color.BLUE
 	},
 	"iron": {
 		"mass_factor": 1.5,
 		"size_factor": 1.2,
-		"move_force": 25.0,
-		"max_speed": 15.0,
+		"move_force": 35.0,
+		"max_speed": 25.0,
 		"color": Color.RED
 	}
 }
