@@ -6,7 +6,10 @@ extends RigidBody3D
 @export var turn_speed := 3.0       
 
 # ===== DYNAMIC RESPAWN SYSTEM =====
-@export var void_check_distance := 30.0 # How far down to look before deciding we've fallen off
+@export var void_check_distance := 30.0 
+@export var void_time_limit := 2.5     # How many seconds to fall before respawning
+var void_timer := 0.0                  # Tracks how long we've been in empty space
+
 var respawn_position := Vector3.ZERO   
 var respawn_heading := 0.0             
 var should_respawn := false            
@@ -27,11 +30,11 @@ func _ready():
 	respawn_heading = heading_angle
 
 func _physics_process(delta):
-	# 1. RUN SMART GROUND & VOID DETECTION
-	check_ground_and_void()
+	# 1. RUN SMART GROUND & VOID DETECTION (Now takes delta)
+	check_ground_and_void(delta)
 	
 	if should_respawn:
-		return # Stop processing inputs if we are in the middle of a respawn
+		return 
 
 	# 2. HANDLE STEERING
 	var steer_input = Input.get_action_strength("move_left") - Input.get_action_strength("move_right")
@@ -54,7 +57,7 @@ func _physics_process(delta):
 		linear_velocity = linear_velocity.normalized() * max_speed
 
 
-func check_ground_and_void():
+func check_ground_and_void(delta: float):
 	var space_state = get_world_3d().direct_space_state
 	var start = global_position
 	
@@ -66,12 +69,12 @@ func check_ground_and_void():
 	var ground_hit = space_state.intersect_ray(short_query)
 	
 	if ground_hit:
-		# Player is safely driving on the track. Save this location!
+		# Player is safely driving on the track. Save this location and reset timer!
 		respawn_position = ground_hit.position + Vector3.UP * (size_factor * 0.6)
 		respawn_heading = heading_angle
+		void_timer = 0.0
 	else:
 		# ---- RAY 2: LONG VOID CHECKER (Airborne) ----
-		# We only check for the void if the player is actually descending (moving downwards)
 		if linear_velocity.y < -1.0:
 			var long_end = global_position + Vector3.DOWN * void_check_distance
 			var long_query = PhysicsRayQueryParameters3D.create(start, long_end)
@@ -79,9 +82,19 @@ func check_ground_and_void():
 			
 			var void_hit = space_state.intersect_ray(long_query)
 			
-			# If the long ray hits ABSOLUTELY NOTHING, they missed the track completely
-			if not void_hit and not should_respawn:
-				trigger_respawn()
+			# If the long ray hits ABSOLUTELY NOTHING, they are in the void
+			if not void_hit:
+				void_timer += delta
+				
+				# Only trigger respawn if they've been out of bounds long enough
+				if void_timer >= void_time_limit and not should_respawn:
+					trigger_respawn()
+			else:
+				# They are airborne but a track is below them, reset the timer
+				void_timer = 0.0
+		else:
+			# Player is either going up a ramp or stationary, keep timer at 0
+			void_timer = 0.0
 
 
 func trigger_respawn():
@@ -95,13 +108,15 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		current_transform.origin = respawn_position
 		state.transform = current_transform
 		
-		# Reset our driving heading
+		# Reset driving heading
 		heading_angle = respawn_heading
 		
-		# Kill all falling velocity instantly
+		# Kill all physics velocity
 		state.linear_velocity = Vector3.ZERO
 		state.angular_velocity = Vector3.ZERO
 		
+		# Reset our timer for the next fall
+		void_timer = 0.0
 		should_respawn = false
 
 

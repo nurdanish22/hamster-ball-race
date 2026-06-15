@@ -36,6 +36,7 @@ script = ExtResource("3_f8dpd")
 move_force = 35.0
 turn_speed = 3.0
 void_check_distance = 30.0
+void_time_limit = 2.5
 
 [node name="CameraRig1" parent="." unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("4_elguq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.6435313, 1, -6.159649)
