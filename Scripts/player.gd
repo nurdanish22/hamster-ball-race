@@ -24,6 +24,14 @@ var size_factor := 1.0
 
 var heading_angle := 0.0
 
+# ===== CAMERA RIG REFERENCE (set by track_manager.gd after spawn) =====
+# The CameraRig that follows this player. Used to read the camera's facing
+# direction so the BallMesh can rotate to face it when moving forward.
+var camera_rig: Node3D = null
+
+# Smooth rotation speed for the visual mesh facing direction (degrees/sec feel)
+@export var mesh_turn_speed := 10.0
+
 # Dynamic Input Action Strings
 var input_left := ""
 var input_right := ""
@@ -81,6 +89,42 @@ func _physics_process(delta):
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
 
+	# 6. VISUAL MESH ORIENTATION
+	# Keep BallMesh upright and facing the camera's forward direction.
+	_update_ball_mesh_rotation(delta, abs(forward_input) > 0.01)
+
+
+func _update_ball_mesh_rotation(delta: float, is_moving: bool) -> void:
+	var mesh: Node3D = get_node_or_null("BallMesh")
+	if mesh == null:
+		return
+
+	# --- Step A: Start from the mesh's current Y so it doesn't snap ---
+	# Because lock_rotation = true the body won't rotate, but we still force the
+	# mesh's world rotation to be flat (no X/Z tilt) every frame.
+	var target_y_angle: float = mesh.global_rotation.y
+
+	# --- Step B: When moving, rotate the mesh to face the camera direction ---
+	if is_moving and camera_rig != null:
+		# The CameraRig's -Z axis (forward) projected onto the XZ plane gives us
+		# the direction the camera is currently facing.
+		var cam_forward: Vector3 = -camera_rig.global_transform.basis.z
+		cam_forward.y = 0.0
+		if cam_forward.length_squared() > 0.001:
+			cam_forward = cam_forward.normalized()
+			# atan2 gives us the Y-axis angle for that direction
+			target_y_angle = atan2(cam_forward.x, cam_forward.z)
+			# If moving backward, flip 180 degrees so the mesh faces away from camera
+			if Input.get_action_strength(input_backward) < Input.get_action_strength(input_forward):
+				target_y_angle += PI
+
+	# --- Step C: Smoothly interpolate the mesh's Y rotation toward the target ---
+	var current_y: float = mesh.global_rotation.y
+	var new_y: float = lerp_angle(current_y, target_y_angle, mesh_turn_speed * delta)
+
+	# Apply: zero out X and Z tilt, only allow Y rotation
+	mesh.global_rotation = Vector3(0.0, new_y, 0.0)
+
 
 func check_ground_and_void(delta: float):
 	var space_state = get_world_3d().direct_space_state
@@ -130,6 +174,9 @@ func apply_ball_profile():
 	mass = mass_factor
 	linear_damp = 0.8 * mass_factor
 	angular_damp = 1.0 * mass_factor
+	# Lock all angular rotation on the physics body so the RigidBody3D never
+	# visibly rolls or tips. The BallMesh child handles all visual orientation.
+	lock_rotation = true
 
 	# ===== DYNAMIC MESH SWAP =====
 	# Remove the old placeholder MeshInstance3D (if present)

@@ -59,6 +59,8 @@ func _wire_cameras() -> void:
 	var cam_rig1 = get_node_or_null("CameraRig1")
 	if cam_rig1 and player1:
 		cam_rig1.target = player1
+		# Give the player a reference back so it can read the camera's facing direction
+		player1.camera_rig = cam_rig1
 
 	# Track01 layout: cameras are nested inside SubViewports
 	var cam_rig1_nested = get_node_or_null(
@@ -66,6 +68,7 @@ func _wire_cameras() -> void:
 	)
 	if cam_rig1_nested and player1:
 		cam_rig1_nested.target = player1
+		player1.camera_rig = cam_rig1_nested
 
 	if Global.is_two_player:
 		var cam_rig2_nested = get_node_or_null(
@@ -73,3 +76,4 @@ func _wire_cameras() -> void:
 		)
 		if cam_rig2_nested and player2:
 			cam_rig2_nested.target = player2
+			player2.camera_rig = cam_rig2_nested
