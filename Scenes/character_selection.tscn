@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://ech7f1h0sl6r"]
+
+[ext_resource type="Script" uid="uid://cwhalb8cuv6rt" path="res://Scripts/character_selection.gd" id="1_mng1v"]
+
+[node name="CharacterSelection" type="Control" unique_id=204662202]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_mng1v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1317423134]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 28.825
+anchor_bottom = 16.175001
+alignment = 1
+
+[node name="P1Panel" type="VBoxContainer" parent="HBoxContainer" unique_id=2114939897]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/P1Panel" unique_id=1059932316]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Player 1 Selection"
+
+[node name="BtnFeatherP1" type="Button" parent="HBoxContainer/P1Panel" unique_id=1850679878]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Feather Ball"
+
+[node name="BtnStandardP1" type="Button" parent="HBoxContainer/P1Panel" unique_id=2089095557]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Standard Ball"
+
+[node name="BtnIronP1" type="Button" parent="HBoxContainer/P1Panel" unique_id=1033685838]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Iron Ball"
+
+[node name="P1ReadyLabel" type="Label" parent="HBoxContainer/P1Panel" unique_id=1308660455]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Selected: Standard"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=336440636]
+layout_mode = 2
+theme_override_constants/margin_left = 92
+
+[node name="P2Panel" type="VBoxContainer" parent="HBoxContainer" unique_id=1572522409]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/P2Panel" unique_id=1141367565]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Player 2 Selection"
+
+[node name="BtnFeatherP2" type="Button" parent="HBoxContainer/P2Panel" unique_id=984612529]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Feather Ball"
+
+[node name="BtnStandardP2" type="Button" parent="HBoxContainer/P2Panel" unique_id=1137790826]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Standard Ball"
+
+[node name="BtnIronP2" type="Button" parent="HBoxContainer/P2Panel" unique_id=1960275565]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Iron Ball"
+
+[node name="P2ReadyLabel" type="Label" parent="HBoxContainer/P2Panel" unique_id=1063065767]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Selected: Standard"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1839436250]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 11.200001
+anchor_top = 12.05
+anchor_right = 18.075
+anchor_bottom = 13.225
+offset_left = -3.0517578e-05
+theme_override_font_sizes/font_size = 28
+text = "START RACE"
+
+[connection signal="pressed" from="HBoxContainer/P1Panel/BtnFeatherP1" to="." method="_on_btn_feather_p_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/P1Panel/BtnStandardP1" to="." method="_on_btn_standard_p_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/P1Panel/BtnIronP1" to="." method="_on_btn_iron_p_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/P2Panel/BtnFeatherP2" to="." method="_on_btn_feather_p_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/P2Panel/BtnStandardP2" to="." method="_on_btn_standard_p_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/P2Panel/BtnIronP2" to="." method="_on_btn_iron_p_2_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

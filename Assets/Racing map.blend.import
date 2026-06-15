@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b4q1tv2kmm2s6"
-path="res://.godot/imported/Racing map.blend-904f9eb4db84df427ab858e3c7b65853.scn"
+path="res://.godot/imported/Racing map.blend-ee621877f7a7ecb0fb55c5cd9ede6411.scn"
 
 [deps]
 
-source_file="res://Racing map.blend"
-dest_files=["res://.godot/imported/Racing map.blend-904f9eb4db84df427ab858e3c7b65853.scn"]
+source_file="res://Assets/Racing map.blend"
+dest_files=["res://.godot/imported/Racing map.blend-ee621877f7a7ecb0fb55c5cd9ede6411.scn"]
 
 [params]
 

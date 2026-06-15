@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://81atvoddvjip"]
 
-[ext_resource type="Script" uid="uid://65fulr1qb6ph" path="res://track_select.gd" id="1_jt3ec"]
+[ext_resource type="Script" uid="uid://65fulr1qb6ph" path="res://Scripts/track_select.gd" id="1_jt3ec"]
 
 [node name="TrackSelect" type="Control" unique_id=658308039]
 layout_mode = 3

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://fo804rqht364"]
 
-[ext_resource type="Script" uid="uid://bpomtd6atvo8i" path="res://mode_select.gd" id="1_qw3jj"]
+[ext_resource type="Script" uid="uid://bpomtd6atvo8i" path="res://Scripts/mode_select.gd" id="1_qw3jj"]
 
 [node name="ModeSelect" type="Control" unique_id=404550815]
 layout_mode = 3
