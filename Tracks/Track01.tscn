@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cguulmnrysj1x"]
 
-[ext_resource type="PackedScene" uid="uid://b4q1tv2kmm2s6" path="res://Assets/Racing map.blend" id="1_cavha"]
-[ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_b3r30"]
-[ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_y582o"]
+[ext_resource type="PackedScene" uid="uid://b4q1tv2kmm2s6" path="res://Assets/Racing map.blend" id="1_lk4pw"]
+[ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_f0dlf"]
+[ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_1k6jp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tlwt5"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,7 +17,7 @@ sky = SubResource("Sky_aqk2v")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Track01" type="Node3D" unique_id=787761610]
+[node name="Track02" type="Node3D" unique_id=787761610]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2075467195]
 environment = SubResource("Environment_036b0")
@@ -26,64 +26,19 @@ environment = SubResource("Environment_036b0")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Racing map" parent="." unique_id=868700591 instance=ExtResource("1_cavha")]
+[node name="Racing map" parent="." unique_id=868700591 instance=ExtResource("1_lk4pw")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.09103465, 0.12605333, -0.857713)
 
-[node name="PlayerBall1" parent="." unique_id=28442041 instance=ExtResource("2_b3r30")]
+[node name="PlayerBall1" parent="." unique_id=28442041 instance=ExtResource("2_f0dlf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4239664, 1, -4.500433)
 
-[node name="PlayerBall2" parent="." unique_id=118592179 instance=ExtResource("2_b3r30")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.43496, 1, -7.5601892)
-player_id = 2
-
-[node name="GridContainer" type="GridContainer" parent="." unique_id=240749938]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="SubViewportContainer1" type="SubViewportContainer" parent="GridContainer" unique_id=1075232161]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="SubViewport1" type="SubViewport" parent="GridContainer/SubViewportContainer1" unique_id=504117741]
-handle_input_locally = false
-size = Vector2i(574, 648)
-render_target_update_mode = 4
-
-[node name="CameraRig1" parent="GridContainer/SubViewportContainer1/SubViewport1" unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("3_y582o")]
+[node name="CameraRig1" parent="." unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("3_1k6jp")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4506083, 1, -4.481065)
-target = NodePath("../../../../PlayerBall1")
+target = NodePath("../PlayerBall1")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="GridContainer/SubViewportContainer1/SubViewport1/CameraRig1" unique_id=989060239]
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig1" unique_id=989060239]
 transform = Transform3D(-1, -2.990035e-08, 8.2150535e-08, 0, 0.9396926, 0.34202012, -8.742278e-08, 0.34202012, -0.9396926, 0, 0, 0)
 spring_length = 3.0
 
-[node name="Camera3D" type="Camera3D" parent="GridContainer/SubViewportContainer1/SubViewport1/CameraRig1/SpringArm3D" unique_id=692836597]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5064745)
-
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer" unique_id=1873731029]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="SubViewport2" type="SubViewport" parent="GridContainer/SubViewportContainer2" unique_id=1491013027]
-handle_input_locally = false
-size = Vector2i(574, 648)
-render_target_update_mode = 4
-
-[node name="CameraRig2" parent="GridContainer/SubViewportContainer2/SubViewport2" unique_id=190627746 node_paths=PackedStringArray("target") instance=ExtResource("3_y582o")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.45515, 1, -7.5426006)
-target = NodePath("../../../../PlayerBall2")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="GridContainer/SubViewportContainer2/SubViewport2/CameraRig2" unique_id=514418615]
-transform = Transform3D(-1, -2.990035e-08, 8.2150535e-08, 0, 0.9396926, 0.34202012, -8.742278e-08, 0.34202012, -0.9396926, 0, 0, 0)
-spring_length = 3.0
-
-[node name="Camera3D" type="Camera3D" parent="GridContainer/SubViewportContainer2/SubViewport2/CameraRig2/SpringArm3D" unique_id=1788547831]
+[node name="Camera3D" type="Camera3D" parent="CameraRig1/SpringArm3D" unique_id=692836597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5064745)

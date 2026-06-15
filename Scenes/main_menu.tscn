@@ -1,55 +1,44 @@
 [gd_scene format=3 uid="uid://crxpipuaw5s0y"]
 
-[ext_resource type="Script" uid="uid://bk3pkipmd2r8i" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="PackedScene" uid="uid://b4q1tv2kmm2s6" path="res://Assets/Racing map.blend" id="1_1ehe0"]
+[ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_ce3w2"]
+[ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_n45e2"]
 
-[node name="MainMenu" type="Control" unique_id=728637913]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_28flt")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tlwt5"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[node name="Label" type="Label" parent="." unique_id=70804436]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 8.375
-anchor_top = 3.1750002
-anchor_right = 20.075
-anchor_bottom = 6.0000005
-offset_top = 1.9999924
-offset_bottom = -1.5258789e-05
-theme_override_font_sizes/font_size = 52
-text = "Hamster Ball Race"
-horizontal_alignment = 1
-vertical_alignment = 1
+[sub_resource type="Sky" id="Sky_aqk2v"]
+sky_material = SubResource("ProceduralSkyMaterial_tlwt5")
 
-[node name="StartButton" type="Button" parent="." unique_id=1202533467]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 12.05
-anchor_top = 8.0
-anchor_right = 19.125
-anchor_bottom = 9.1
-offset_left = -45.0
-offset_top = 48.0
-offset_right = -45.0
-offset_bottom = 48.0
-theme_override_font_sizes/font_size = 26
-text = "Start"
+[sub_resource type="Environment" id="Environment_036b0"]
+background_mode = 2
+sky = SubResource("Sky_aqk2v")
+tonemap_mode = 2
+glow_enabled = true
 
-[node name="QuitButton" type="Button" parent="." unique_id=450697082]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 12.025001
-anchor_top = 9.925
-anchor_right = 19.1
-anchor_bottom = 11.025001
-offset_left = -45.00003
-offset_top = 48.0
-offset_right = -45.0
-offset_bottom = 47.99997
-theme_override_font_sizes/font_size = 26
-text = "Quit"
+[node name="Track02" type="Node3D" unique_id=787761610]
 
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2075467195]
+environment = SubResource("Environment_036b0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=377360933]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Racing map" parent="." unique_id=868700591 instance=ExtResource("1_1ehe0")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.09103465, 0.12605333, -0.857713)
+
+[node name="PlayerBall1" parent="." unique_id=28442041 instance=ExtResource("2_ce3w2")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4239664, 1, -4.500433)
+
+[node name="CameraRig1" parent="." unique_id=215445136 node_paths=PackedStringArray("target") instance=ExtResource("3_n45e2")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.4506083, 1, -4.481065)
+target = NodePath("../PlayerBall1")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig1" unique_id=989060239]
+transform = Transform3D(-1, -2.990035e-08, 8.2150535e-08, 0, 0.9396926, 0.34202012, -8.742278e-08, 0.34202012, -0.9396926, 0, 0, 0)
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig1/SpringArm3D" unique_id=692836597]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5064745)
