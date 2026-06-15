@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cyjmqco38nqu4"]
+
+[ext_resource type="PackedScene" uid="uid://cmrs03808ook2" path="res://Assets/ball_(default).tscn" id="1_l8tlc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v7nnn"]
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=2074404442]
+
+[node name="Ball (Default)" parent="." unique_id=2042530436 instance=ExtResource("1_l8tlc")]
+transform = Transform3D(0.585, 0, 0, 0, 0.585, 0, 0, 0, 0.585, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1308845309]
+shape = SubResource("SphereShape3D_v7nnn")

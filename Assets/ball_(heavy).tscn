@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c77qhyl7ww5x3"]
+
+[ext_resource type="PackedScene" uid="uid://8s7e64ta6y85" path="res://Assets/Ball (Heavy).glb" id="1_43csx"]
+
+[node name="Ball (Heavy)" unique_id=368121524 instance=ExtResource("1_43csx")]

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ciia0vaypcpm2"]
+
+[ext_resource type="PackedScene" uid="uid://cgc40f1ovqx41" path="res://Assets/Ball (Speed).glb" id="1_0fend"]
+
+[node name="Ball (Speed)" unique_id=1084198120 instance=ExtResource("1_0fend")]
