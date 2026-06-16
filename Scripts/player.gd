@@ -74,6 +74,12 @@ func load_selected_profile():
 
 
 func _physics_process(delta):
+	# Freeze physics and inputs if the race hasn't started yet
+	if not Global.race_active:
+		linear_velocity = Vector3.ZERO
+		angular_velocity = Vector3.ZERO
+		return
+
 	check_ground_and_void(delta)
 	if should_respawn: return 
 

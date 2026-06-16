@@ -3,6 +3,24 @@ extends Node
 
 var is_two_player := false # True if 2-player split screen, false if solo
 
+var race_active := false # Controls whether balls are allowed to move
+
+# Global.gd updates
+var total_laps := 2 # Change this to 3, 5, etc. depending on your project requirements
+
+# Track progress for each player ID
+var p1_laps := 0
+var p2_laps := 0
+var p1_cleared_midpoint := false
+var p2_cleared_midpoint := false
+
+# Call this from your RaceHUD or Track script when the scene loads to wipe previous game data
+func reset_race_data():
+	p1_laps = 0
+	p2_laps = 0
+	p1_cleared_midpoint = false
+	p2_cleared_midpoint = false
+
 # Maps each choice key to the corresponding ball scene path
 const BALL_SCENES = {
 	"feather": "res://Balls/ball_speed.tscn",

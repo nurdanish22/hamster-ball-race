@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dwefok7rp63ma"]
+
+[ext_resource type="Script" uid="uid://cxufjpd55wv7g" path="res://mid_checkpoint.gd" id="1_qanrn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cghb2"]
+size = Vector3(2.9086914, 1.9844971, 7.8879395)
+
+[node name="MidCheckpoint" type="Area3D" unique_id=1531001150]
+script = ExtResource("1_qanrn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=746570718]
+shape = SubResource("BoxShape3D_cghb2")

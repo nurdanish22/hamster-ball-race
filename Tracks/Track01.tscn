@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_f0dlf"]
 [ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_1k6jp"]
 [ext_resource type="PackedScene" uid="uid://4lc2dhktj21v" path="res://Scenes/pause_menu.tscn" id="4_lk4pw"]
+[ext_resource type="PackedScene" uid="uid://dghej5jk7puec" path="res://Scenes/race_hud.tscn" id="6_cdjjo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tlwt5"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -94,3 +95,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5064745)
 [node name="Node" type="Node" parent="." unique_id=901598383]
 
 [node name="pause_menu" parent="." unique_id=1274873947 instance=ExtResource("4_lk4pw")]
+
+[node name="RaceHUD" parent="." unique_id=1755345260 instance=ExtResource("6_cdjjo")]

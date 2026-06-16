@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://gnvhws6q8mg3"]
+
+[ext_resource type="Script" uid="uid://drrclsd6b1m80" path="res://Scripts/finish_line.gd" id="1_fpin6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yfpjd"]
+size = Vector3(2.2038574, 2, 8.446472)
+
+[node name="FinishLine" type="Area3D" unique_id=67505723]
+script = ExtResource("1_fpin6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1693182095]
+shape = SubResource("BoxShape3D_yfpjd")
