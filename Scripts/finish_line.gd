@@ -39,6 +39,11 @@ func check_victory(id: int) -> void:
 		Global.race_active = false
 		
 		if win_label:
+			# Style the text: White font, Black outline
+			win_label.add_theme_color_override("font_color", Color.WHITE)
+			win_label.add_theme_color_override("font_outline_color", Color.BLACK)
+			win_label.add_theme_constant_override("outline_size", 12) # Adjust this number to change thickness
+			
 			if Global.is_two_player:
 				win_label.text = "PLAYER %d WINS!" % id
 			else:

@@ -10,6 +10,9 @@ var time_elapsed := 0.0
 var countdown_time := 3
 
 func _ready() -> void:
+	# Style all the HUD labels right away
+	_style_hud_labels()
+	
 	Global.race_active = false
 	time_label.text = "00:00.00"
 	
@@ -23,6 +26,15 @@ func _ready() -> void:
 		p1_lap_label.text = "LAP: 1/" + str(Global.total_laps)
 		
 	run_countdown()
+
+func _style_hud_labels() -> void:
+	var labels: Array[Label] = [countdown_label, time_label, p1_lap_label, p2_lap_label]
+	
+	for label in labels:
+		if label:
+			label.add_theme_color_override("font_color", Color.WHITE)
+			label.add_theme_color_override("font_outline_color", Color.BLACK)
+			label.add_theme_constant_override("outline_size", 12) # Adjust this number to change border thickness
 
 func run_countdown() -> void:
 	while countdown_time > 0:
