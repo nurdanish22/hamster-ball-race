@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bndva72frjipy" path="res://Scenes/player_ball.tscn" id="2_b3r30"]
 [ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_y582o"]
 [ext_resource type="PackedScene" uid="uid://4lc2dhktj21v" path="res://Scenes/pause_menu.tscn" id="4_b3r30"]
-[ext_resource type="PackedScene" uid="uid://dghej5jk7puec" path="res://Scenes/race_hud.tscn" id="6_32rlq"]
-[ext_resource type="PackedScene" uid="uid://gnvhws6q8mg3" path="res://Scenes/finish_line.tscn" id="7_f8dpd"]
-[ext_resource type="PackedScene" uid="uid://dwefok7rp63ma" path="res://mid_checkpoint.tscn" id="8_elguq"]
+[ext_resource type="PackedScene" uid="uid://dsr7xeniahabu" path="res://Scenes/physics_box.tscn" id="5_w3ppx"]
+[ext_resource type="PackedScene" path="res://Scenes/race_hud.tscn" id="6_32rlq"]
+[ext_resource type="PackedScene" path="res://Scenes/finish_line.tscn" id="7_f8dpd"]
+[ext_resource type="PackedScene" path="res://mid_checkpoint.tscn" id="8_elguq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tlwt5"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -48,6 +49,44 @@ spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig1/SpringArm3D" unique_id=692836597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5064745)
+
+[node name="Obstacles" type="Node3D" parent="." unique_id=845888626]
+
+[node name="PhysicsBox" parent="Obstacles" unique_id=404149885 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, -9.05678, 2.3523712, -4.6103406)
+
+[node name="PhysicsBox2" parent="Obstacles" unique_id=299204927 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, -14.771477, 2.3523712, -5.8441644)
+
+[node name="PhysicsBox3" parent="Obstacles" unique_id=974707979 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, -18.671555, 2.3523712, -2.715436)
+
+[node name="PhysicsBox4" parent="Obstacles" unique_id=2041987478 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, -157.23979, 2.3523712, -12.950826)
+
+[node name="PhysicsBox5" parent="Obstacles" unique_id=1774530095 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, -144.22072, 2.3523712, -16.94236)
+
+[node name="PhysicsBox6" parent="Obstacles" unique_id=1948551299 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, 4.2321167, 2.3523712, -82.31194)
+
+[node name="PhysicsBox7" parent="Obstacles" unique_id=1129057292 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, 6.267166, 2.3523712, -79.066025)
+
+[node name="PhysicsBox8" parent="Obstacles" unique_id=475411111 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, 43.09355, 2.3523712, -59.123177)
+
+[node name="PhysicsBox9" parent="Obstacles" unique_id=877525553 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, 144.09016, 2.3523712, -39.395855)
+
+[node name="PhysicsBox10" parent="Obstacles" unique_id=60939364 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, -10.156036, 2.3523712, 106.41841)
+
+[node name="PhysicsBox11" parent="Obstacles" unique_id=1621603427 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, -4.6810265, 2.3523712, 113.19225)
+
+[node name="PhysicsBox12" parent="Obstacles" unique_id=1860142206 instance=ExtResource("5_w3ppx")]
+transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.9808091, 119.72594, 2.3523712, -11.586433)
 
 [node name="pause_menu" parent="." unique_id=1274873947 instance=ExtResource("4_b3r30")]
 
