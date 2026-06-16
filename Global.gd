@@ -43,7 +43,7 @@ const BALL_PROFILES = {
 	"standard": {
 		"mass_factor": 1.0,
 		"size_factor": 1.0,
-		"move_force": 38.0,
+		"move_force": 40.0,
 		"max_speed": 28.0,
 		"color": Color.BLUE,
 		"impact_multiplier": 0.5
@@ -51,7 +51,7 @@ const BALL_PROFILES = {
 	"iron": {
 		"mass_factor": 1.0,
 		"size_factor": 1.2,
-		"move_force": 36.0,
+		"move_force": 40.0,
 		"max_speed": 30.0,
 		"color": Color.RED,
 		"impact_multiplier": 2.0

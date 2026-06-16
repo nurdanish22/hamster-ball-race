@@ -97,5 +97,3 @@ transform = Transform3D(0.9923557, 0, 0.123410955, 0, 1, 0, -0.123410955, 0, 0.9
 
 [node name="MidCheckpoint" parent="." unique_id=1531001150 instance=ExtResource("8_elguq")]
 transform = Transform3D(0.047629405, 0, -0.99886507, 0, 1, 0, 0.99886507, 0, 0.047629405, 172.44923, 0, 0)
-
-[editable path="Racing map"]
