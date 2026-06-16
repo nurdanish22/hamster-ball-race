@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_1k6jp"]
 [ext_resource type="PackedScene" uid="uid://4lc2dhktj21v" path="res://Scenes/pause_menu.tscn" id="4_lk4pw"]
 [ext_resource type="PackedScene" uid="uid://dsr7xeniahabu" path="res://Scenes/physics_box.tscn" id="5_5orvk"]
-[ext_resource type="PackedScene" path="res://Scenes/race_hud.tscn" id="6_cdjjo"]
+[ext_resource type="PackedScene" uid="uid://dghej5jk7puec" path="res://Scenes/race_hud.tscn" id="6_cdjjo"]
+[ext_resource type="PackedScene" uid="uid://gnvhws6q8mg3" path="res://Scenes/finish_line.tscn" id="8_dmorp"]
+[ext_resource type="PackedScene" uid="uid://dwefok7rp63ma" path="res://mid_checkpoint.tscn" id="9_vemlt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tlwt5"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -136,3 +138,9 @@ transform = Transform3D(0.9808091, 0, -0.1949705, 0, 1, 0, 0.1949705, 0, 0.98080
 [node name="pause_menu" parent="." unique_id=1274873947 instance=ExtResource("4_lk4pw")]
 
 [node name="RaceHUD" parent="." unique_id=1755345260 instance=ExtResource("6_cdjjo")]
+
+[node name="FinishLine" parent="." unique_id=67505723 instance=ExtResource("8_dmorp")]
+transform = Transform3D(0.9923557, 0, 0.123410955, 0, 1, 0, -0.123410955, 0, 0.9923557, 5.354099, 1, -6.626351)
+
+[node name="MidCheckpoint" parent="." unique_id=1531001150 instance=ExtResource("9_vemlt")]
+transform = Transform3D(0.047629405, 0, -0.99886507, 0, 1, 0, 0.99886507, 0, 0.047629405, 172.44923, 0, 0)

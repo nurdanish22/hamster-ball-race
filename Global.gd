@@ -29,27 +29,32 @@ const BALL_SCENES = {
 }
 
 # Add the ball profiles
+# impact_multiplier controls how hard the ball pushes RigidBody3D obstacles on contact.
+# feather = light tap, standard = normal push, iron = heavy smash.
 const BALL_PROFILES = {
 	"feather": {
 		"mass_factor": 0.6,
 		"size_factor": 0.8,
 		"move_force": 40.0,
-		"max_speed": 30.0,
-		"color": Color.YELLOW
+		"max_speed": 26.0,
+		"color": Color.YELLOW,
+		"impact_multiplier": 0.05
 	},
 	"standard": {
 		"mass_factor": 1.0,
 		"size_factor": 1.0,
 		"move_force": 38.0,
 		"max_speed": 28.0,
-		"color": Color.BLUE
+		"color": Color.BLUE,
+		"impact_multiplier": 0.5
 	},
 	"iron": {
-		"mass_factor": 1.5,
+		"mass_factor": 1.0,
 		"size_factor": 1.2,
-		"move_force": 35.0,
-		"max_speed": 25.0,
-		"color": Color.RED
+		"move_force": 36.0,
+		"max_speed": 30.0,
+		"color": Color.RED,
+		"impact_multiplier": 2.0
 	}
 }
 

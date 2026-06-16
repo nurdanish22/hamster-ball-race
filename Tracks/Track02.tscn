@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cmfdaqae6ga5w" path="res://Scenes/camera_rig.tscn" id="3_y582o"]
 [ext_resource type="PackedScene" uid="uid://4lc2dhktj21v" path="res://Scenes/pause_menu.tscn" id="4_b3r30"]
 [ext_resource type="PackedScene" uid="uid://dsr7xeniahabu" path="res://Scenes/physics_box.tscn" id="5_w3ppx"]
-[ext_resource type="PackedScene" path="res://Scenes/race_hud.tscn" id="6_32rlq"]
-[ext_resource type="PackedScene" path="res://Scenes/finish_line.tscn" id="7_f8dpd"]
-[ext_resource type="PackedScene" path="res://mid_checkpoint.tscn" id="8_elguq"]
+[ext_resource type="PackedScene" uid="uid://dghej5jk7puec" path="res://Scenes/race_hud.tscn" id="6_32rlq"]
+[ext_resource type="PackedScene" uid="uid://gnvhws6q8mg3" path="res://Scenes/finish_line.tscn" id="7_f8dpd"]
+[ext_resource type="PackedScene" uid="uid://dwefok7rp63ma" path="res://mid_checkpoint.tscn" id="8_elguq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tlwt5"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -97,3 +97,5 @@ transform = Transform3D(0.9923557, 0, 0.123410955, 0, 1, 0, -0.123410955, 0, 0.9
 
 [node name="MidCheckpoint" parent="." unique_id=1531001150 instance=ExtResource("8_elguq")]
 transform = Transform3D(0.047629405, 0, -0.99886507, 0, 1, 0, 0.99886507, 0, 0.047629405, 172.44923, 0, 0)
+
+[editable path="Racing map"]

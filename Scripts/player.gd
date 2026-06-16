@@ -20,7 +20,10 @@ var should_respawn := false
 
 # ===== PHYSICS IDENTITY =====
 var mass_factor := 1.0      
-var size_factor := 1.0      
+var size_factor := 1.0
+# Scales the impulse applied to RigidBody3D obstacles on contact.
+# feather=0.3 (light), standard=1.0 (normal), iron=3.0 (heavy smash).
+var impact_multiplier := 1.0
 
 var heading_angle := 0.0
 
@@ -71,6 +74,7 @@ func load_selected_profile():
 	move_force = profile["move_force"]
 	max_speed = profile["max_speed"]
 	ball_color = profile["color"]
+	impact_multiplier = profile["impact_multiplier"]
 
 
 func _physics_process(delta):
@@ -194,6 +198,34 @@ func check_ground_and_void(delta: float):
 func trigger_respawn():
 	should_respawn = true
 
+
+# ===== OBSTACLE IMPACT =====
+# Called automatically when this RigidBody3D makes contact with another body.
+# We apply a scaled impulse to any RigidBody3D obstacle we hit, overriding
+# the natural momentum-based push so that iron hits hard and feather barely nudges.
+func _on_body_entered(body: Node) -> void:
+	# Only push other RigidBody3D nodes that are NOT the player itself
+	if not body is RigidBody3D:
+		return
+	if body == self:
+		return
+	# Skip other player balls (they have player.gd attached)
+	if body.get_script() == get_script():
+		return
+
+	# Direction of impact: from this ball toward the obstacle
+	var impact_dir: Vector3 = (body.global_position - global_position)
+	if impact_dir.length_squared() < 0.0001:
+		return
+	impact_dir = impact_dir.normalized()
+
+	# Base impulse = our current horizontal speed, scaled by impact_multiplier.
+	# This completely decouples push strength from ball mass/velocity,
+	# giving us direct designer control per ball type.
+	var horizontal_speed: float = Vector2(linear_velocity.x, linear_velocity.z).length()
+	var impulse_strength: float = horizontal_speed * impact_multiplier * 2.0
+	body.apply_central_impulse(impact_dir * impulse_strength)
+
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if should_respawn:
 		var current_transform = state.transform
@@ -213,6 +245,12 @@ func apply_ball_profile():
 	# Lock all angular rotation on the physics body so the RigidBody3D never
 	# visibly rolls or tips. The BallMesh child handles all visual orientation.
 	lock_rotation = true
+
+	# Enable contact monitoring so _on_body_entered fires for obstacle collisions
+	contact_monitor = true
+	max_contacts_reported = 4
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
 
 	# ===== DYNAMIC MESH SWAP =====
 	# Remove the old placeholder MeshInstance3D (if present)
